@@ -1,5 +1,5 @@
-from urllib.parse import urlencode, urlunparse
-from ...model.naver import NidUrlComponents, Token
+from urllib.parse import urlencode
+from ...model.naver import NidUrlComponents, OpenApiUrlComponents, Token, NaverUser, NaverUserResponse
 from ...constants import NAVER_CLIENT_ID, NAVER_CLIENT_SECRET
 import requests
 
@@ -30,10 +30,23 @@ def get_access_token(code: str) -> Token:
     }
 
     access_token_url = NidUrlComponents(
-        path="oauth2.0/token",
+        path="/oauth2.0/token",
         query=urlencode(query_params)
     ).to_url()
 
     response = requests.get(access_token_url).json()
     return Token(**response)
+
+def get_user(access_token: str) -> NaverUser:
+    headers = {
+        'Authorization': 'Bearer ' + access_token
+    }
+
+    url = OpenApiUrlComponents(
+        path="/v1/nid/me"
+    ).to_url()
+
+    response = requests.get(url=url, headers=headers).json()
+    return NaverUserResponse(**response).response
+
 
