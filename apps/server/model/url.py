@@ -5,7 +5,7 @@ from urllib.parse import urlunparse
 @dataclass
 class UrlComponents:
     path: str
-    query: str
+    query: str = ""
     scheme: str = "https"
     netloc: str = field(init=False)
 

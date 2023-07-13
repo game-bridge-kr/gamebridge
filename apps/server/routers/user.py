@@ -15,4 +15,6 @@ async def naver_login():
 async def naver_login_callback(request: LoginCallbackRequest = Depends()):
     if request.code is not None:
         token = naver_service.get_access_token(request.code)
+        user = naver_service.get_user(token.access_token)
+        print(user)
         
