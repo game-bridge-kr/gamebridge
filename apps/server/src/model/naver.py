@@ -1,6 +1,6 @@
 from typing import Optional
 from pydantic.dataclasses import dataclass
-from pydantic import BaseModel, EmailStr, model_validator
+from pydantic import BaseModel, EmailStr, model_validator, Field
 from enum import Enum
 from .url import UrlComponents
 
@@ -50,18 +50,11 @@ class Token(BaseModel):
         return values
 
 
-class Gender(Enum):
-    FEMALE = "F"
-    MALE = "M"
-    UNKNOWN = "U"
-
-
 class NaverUser(BaseModel):
     id: str
-    name: str
     nickname: str
     email: EmailStr
-    gender: Gender
+    gender: str
     birthyear: int
     age: str
     mobile: str
@@ -71,4 +64,8 @@ class NaverUserResponse(BaseModel):
     resultcode: str
     message: str
     response: NaverUser
+
+
+class NaverUserRegisterRequest(BaseModel):
+    access_token: str
 
