@@ -5,7 +5,7 @@ name: Server CI Test
 
 on:
   pull_request:
-    branches: ['main']
+    branches: ['master']
     paths: ['apps/server/**']
 
 permissions:
