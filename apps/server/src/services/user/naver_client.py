@@ -1,6 +1,7 @@
 from urllib.parse import urlencode
 from ...model.naver import NidUrlComponents, OpenApiUrlComponents, Token, NaverUser, NaverUserResponse
 from ...constants import NAVER_CLIENT_ID, NAVER_CLIENT_SECRET
+from fastapi import status, HTTPException
 import requests
 
 STATE = '11' # random value
@@ -20,7 +21,7 @@ def get_authenticate_url() -> str:
     ).to_url()
 
 
-def get_access_token(code: str) -> Token:
+def get_token(code: str) -> Token:
     query_params = {
         'grant_type': 'authorization_code',
         'client_id': NAVER_CLIENT_ID,
@@ -47,6 +48,12 @@ def get_user(access_token: str) -> NaverUser:
         path="/v1/nid/me"
     ).to_url()
 
-    response = requests.get(url=url, headers=headers).json()
-    return NaverUserResponse(**response).response
+    try:
+        response = requests.get(url=url, headers=headers).json()
+        return NaverUserResponse(**response).response
+    except:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="failed to get user info from naver ID API"
+        )
 

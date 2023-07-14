@@ -66,6 +66,6 @@ class NaverUserResponse(BaseModel):
     response: NaverUser
 
 
-class NaverUserRegisterRequest(BaseModel):
+class NaverUserRequest(BaseModel):
     access_token: str
 

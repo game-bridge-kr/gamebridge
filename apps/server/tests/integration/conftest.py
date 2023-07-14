@@ -23,11 +23,11 @@ def mock_naver_client_get_user(monkeypatch):
 @pytest.fixture(autouse=True)
 def set_test_context(monkeypatch):
     # before each test
-    monkeypatch.setenv("MONGO_DB_DATABASE", "test_database")
+    monkeypatch.setenv("MONGO_DB_DATABASE", "pytest_database")
     database.connect()
 
     yield
-    
+
     # after each test
     database.get_users().drop()
     database.close()
