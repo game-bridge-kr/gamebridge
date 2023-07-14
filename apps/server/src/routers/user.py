@@ -16,7 +16,6 @@ async def naver_login():
 async def naver_login_callback(request: LoginCallbackRequest = Depends()):
     if request.code is not None:
         token = naver_client.get_access_token(request.code)
-        print(token.access_token)
         return naver_client.get_user(token.access_token)
     
     raise HTTPException(
