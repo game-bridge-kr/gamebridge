@@ -5,15 +5,14 @@ name: Server CI Test
 
 on:
   pull_request:
-    branches: ['main']
+    branches: ['master']
     paths: ['apps/server/**']
 
 permissions:
   contents: read
 
 jobs:
-  build:
-
+  flake8_and_pytest:
     runs-on: ubuntu-latest
 
     steps:

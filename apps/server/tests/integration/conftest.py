@@ -8,7 +8,6 @@ import pytest
 @pytest.fixture(autouse=True)
 def mock_naver_client_get_user(monkeypatch):
     def mock_naver_user(token):
-        print(token)
         return NaverUser(
             id="id-1",
             nickname="nickname",
