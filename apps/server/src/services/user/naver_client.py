@@ -6,10 +6,10 @@ import requests
 STATE = '11' # random value
 
 
-def get_autorhize_url() -> str:
+def get_authenticate_url() -> str:
     query_params = {
         'client_id': NAVER_CLIENT_ID,
-        'redirect_uri': "http://127.0.0.1:8000/api/login/naver/redirect",
+        'redirect_uri': "http://127.0.0.1:8000/api/naver/redirect",
         'response_type': 'code',
         'state': STATE
     }
@@ -37,6 +37,7 @@ def get_access_token(code: str) -> Token:
     response = requests.get(access_token_url).json()
     return Token(**response)
 
+
 def get_user(access_token: str) -> NaverUser:
     headers = {
         'Authorization': 'Bearer ' + access_token
@@ -48,5 +49,4 @@ def get_user(access_token: str) -> NaverUser:
 
     response = requests.get(url=url, headers=headers).json()
     return NaverUserResponse(**response).response
-
 
