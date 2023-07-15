@@ -19,7 +19,8 @@ jobs:
       run: |
         pip install -r apps/server/requirements.txt
     - name: Run tox
-      run: (cd apps/server; tox -e py)
+      working-directory: apps/server
+      run: tox -e py
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
       env:
