@@ -33,11 +33,10 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Run coverage with pytest
-      working-directory: apps/server
       env:
         MONGO_DB_URL: ${{ secrets.MONGO_DB_URL }}
         NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
         MONGO_DB_DATABASE: test_database
       run: |
-        coverage run --source=src -m pytest
+        coverage run --source=/apps/server/src -m pytest
         coverage xml
