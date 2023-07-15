@@ -33,8 +33,6 @@ async def naver_user(access_token: str):
 
 @router.post("/register")
 async def naver_register(request: NaverUserRequest = Body()):
-    if False:
-        print("unreachable")
     naver_user = naver_client.get_user(request.access_token)
     user = User(naver_user=naver_user)
     user_service.register(user)  
