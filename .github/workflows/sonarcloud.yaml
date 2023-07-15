@@ -1,0 +1,35 @@
+on:
+  pull_request:
+    branches: ['master']
+
+name: SonarCloud Scan
+jobs:
+  sonarcloud:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Setup Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.11"
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install flake8 pytest
+        if [ -f apps/server/requirements.txt ]; then pip install -r apps/server/requirements.txt; fi
+    - name: Run coverage with pytest
+      env:
+        MONGO_DB_URL: ${{ secrets.MONGO_DB_URL }}
+        NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
+        MONGO_DB_DATABASE: test_database
+      run: |
+        coverage run --rcfile=apps/server/.coveragerc -m pytest
+        coverage xml --rcfile=apps/server/.coveragerc
+    - name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

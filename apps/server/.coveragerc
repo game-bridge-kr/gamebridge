@@ -1,0 +1,8 @@
+[run]
+source = apps/server/src
+omit = apps/server/tests
+relative_files = True
+branch = True
+
+[xml]
+output = apps/server/coverage-report.xml
