@@ -4,6 +4,7 @@ cachetools==5.3.1
 certifi==2023.5.7
 charset-normalizer==3.2.0
 click==8.1.4
+coverage==7.2.7
 dnspython==2.3.0
 email-validator==2.0.0.post2
 fastapi==0.100.0
