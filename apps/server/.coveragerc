@@ -1,0 +1,4 @@
+[coverage:run]
+source = apps/server/src
+omit = apps/server/tests
+relative_files = True
