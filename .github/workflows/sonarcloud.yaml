@@ -27,7 +27,7 @@ jobs:
         MONGO_DB_DATABASE: test_database
       run: |
         coverage run --rcfile=apps/server/.coveragerc -m pytest
-        coverage xml
+        coverage xml --rcfile=apps/server/.coveragerc
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
       env:
