@@ -21,6 +21,10 @@ jobs:
     - name: Run tox
       working-directory: apps/server
       run: tox -e py
+      env:
+        MONGO_DB_URL: ${{ secrets.MONGO_DB_URL }}
+        NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
+        MONGO_DB_DATABASE: test_database
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
       env:
