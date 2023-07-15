@@ -38,5 +38,5 @@ jobs:
         NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
         MONGO_DB_DATABASE: test_database
       run: |
-        coverage run --source=/apps/server/src -m pytest
+        coverage run --source=apps/server/src -m pytest
         coverage xml
