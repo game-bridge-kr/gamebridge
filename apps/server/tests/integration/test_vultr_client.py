@@ -1,5 +1,4 @@
 import pytest
-from httpx import AsyncClient
 from ...src.vultr.client import vultr_aysnc_client
 from ...src.main import app
 

@@ -30,6 +30,7 @@ jobs:
         MONGO_DB_URL: ${{ secrets.MONGO_DB_URL }}
         NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
         MONGO_DB_DATABASE: test_database
+        VULTR_API_KEY: ${{ secrets.VULTR_API_KEY }}
       run: |
         coverage run --rcfile=apps/server/.coveragerc -m pytest
         coverage xml --rcfile=apps/server/.coveragerc
@@ -38,4 +39,3 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        VULTR_API_KEY: ${{ secrets.VULTR_API_KEY }}
