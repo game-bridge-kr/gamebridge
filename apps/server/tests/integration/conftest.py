@@ -1,7 +1,8 @@
 from ...src.model.naver import NaverUser
 from ...src.services.user import naver_client
 from ...src.repository.mongo import database
-import pytest
+from ...src.vultr.client import vultr_aysnc_client
+import pytest, asyncio
 
 
 # should run integration test but mocking naver API since access token is sensitive data.
@@ -25,10 +26,12 @@ def set_test_context(monkeypatch):
     # before each test
     monkeypatch.setenv("MONGO_DB_DATABASE", "pytest_database")
     database.connect()
+    vultr_aysnc_client.init()
 
     yield
 
     # after each test
     database.get_users().drop()
     database.close()
+    asyncio.run(vultr_aysnc_client.close())
 
