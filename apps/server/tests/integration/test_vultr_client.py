@@ -1,5 +1,5 @@
 import pytest
-from ...src.vultr.client import vultr_aysnc_client
+from ...src.services.vultr.client import vultr_aysnc_client
 from ...src.main import app
 
 
