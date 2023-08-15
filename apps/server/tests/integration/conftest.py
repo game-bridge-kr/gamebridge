@@ -1,7 +1,7 @@
 from ...src.model.naver import NaverUser
 from ...src.services.user import naver_client
 from ...src.repository.mongo import database
-from ...src.vultr.client import vultr_aysnc_client
+from ...src.services.vultr.client import vultr_aysnc_client
 import pytest, asyncio
 
 

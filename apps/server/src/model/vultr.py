@@ -931,6 +931,11 @@ class Meta(BaseModel):
     links: Optional[Links] = Field(None, description='Cursor values for pagination.')
 
 
+class InstanceList(BaseModel):
+    instances: Optional[List[Instance]] = Field(None, description="Array of objects (instance) [ items ]")
+    meta: Optional[Meta] = Field(None, description="The meta information object. See Meta and Pagination for more information.")
+
+
 class LoadbalancerFirewallRule(BaseModel):
     id: Optional[constr(min_length=1)] = Field(
         None, description='The unique ID for the firewall rule'
@@ -971,3 +976,4 @@ class VkeCluster(BaseModel):
     node_pools: Optional[List[Nodepools]] = Field(
         None, description='NodePools in this cluster'
     )
+

@@ -1,8 +1,6 @@
-from ..constants import VULTR_API_KEY
+from ...constants import VULTR_API_KEY
 from httpx import AsyncClient
-from pydantic import BaseModel
-from typing import Type
-from . import model
+from ...model import vultr
 
 
 class VultrAsyncClient:
@@ -52,48 +50,43 @@ class VultrAsyncClient:
         return data
 
 
-    async def get_account(self) -> model.Account:
+    async def get_account(self) -> vultr.Account:
         data = await self.rest_get("/account")
         
         account_data = data['account']
-        return model.Account(**account_data)
+        return vultr.Account(**account_data)
     
-    async def get_instances(self, per_page: int = 100, cursor: str = None) -> tuple[list[model.Instance], model.Meta]:
+    async def get_instances(self, per_page: int = 100, cursor: str = None) -> vultr.InstanceList:
         params = { 'per_page': per_page, }
 
         if cursor is not None:
             params['cursor'] = cursor
 
         data = await self.rest_get("/instances", params=params)
+        instance_list = vultr.InstanceList(**data)
 
-        instances_data = data['instances']
-        meta_data = data['meta']
-
-        instances = [model.Instance(**data) for data in instances_data]
-        meta = model.Meta(**meta_data)
-
-        return instances, meta
+        return instance_list
     
-    async def create_instance(self, create_instance: model.CreateInstance) -> model.Instance:
+    async def create_instance(self, create_instance: vultr.CreateInstance) -> vultr.Instance:
         content = create_instance.model_dump()
 
         data = await self.rest_post("/instances", content=content)
 
         instance_data = data['instance']
-        instance = model.Instance(**instance_data)
+        instance = vultr.Instance(**instance_data)
 
         return instance
 
-    async def get_instance(self, instance_id: str) -> model.Instance:
+    async def get_instance(self, instance_id: str) -> vultr.Instance:
         data = await self.rest_get(f"/instances/{instance_id}")
         instance_data = data['instance']
-        return model.Instance(**instance_data)
+        return vultr.Instance(**instance_data)
     
-    async def update_instance(self, instance_id: str, update_instance: model.UpdateInstance) -> model.Instance:
+    async def update_instance(self, instance_id: str, update_instance: vultr.UpdateInstance) -> vultr.Instance:
         content = update_instance.model_dump()
         data = await self.rest_patch(f"/instances/{instance_id}", content=content)
         instance_data = data['instance']
-        return model.Instance(**instance_data)
+        return vultr.Instance(**instance_data)
 
     async def delete_instance(self, instance_id: str):
         response = await self.async_client.delete(f"/instances/{instance_id}")

@@ -1,6 +1,7 @@
 import uvicorn
 from fastapi import FastAPI
 from .routers import user
+from .routers import vultr
 from .repository.mongo import database
 
 
@@ -17,6 +18,7 @@ def close_mongodb():
 
 
 app.include_router(user.router)
+app.include_router(vultr.router)
 
 @app.get("/")
 async def root():
