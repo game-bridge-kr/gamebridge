@@ -11,7 +11,7 @@ def test_hello():
 
     assert response.status_code == 200
     assert content['message'] == "Hello World"
-    
+
 
 def test_naver_authenticate():
     response = client.get("/api/naver/authenticate")
@@ -34,7 +34,7 @@ def test_naver_user():
 
 def test_naver_register():
     response = client.post("/api/naver/register", json={'access_token': "token"})
-    
+
     assert response.json()['naver_user']['id'] == 'id-1'
 
 

@@ -1,7 +1,6 @@
 from typing import Optional
 from pydantic.dataclasses import dataclass
 from pydantic import BaseModel, EmailStr, model_validator, Field
-from enum import Enum
 from .url import UrlComponents
 
 
