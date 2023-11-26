@@ -5,7 +5,7 @@ from ..constants import mongo_db_url, mongo_db_database
 from enum import Enum
 
 
-class CollectionEnum(Enum):
+class CollectionEnum(str, Enum):
     USER = "user"
 
 
@@ -21,7 +21,7 @@ class MongoDatabase:
         return self.db
 
     def get_users(self) -> Collection:
-        return self.db.get_collection(CollectionEnum.USER.value)
+        return self.db.get_collection(CollectionEnum.USER)
     
 
 database = MongoDatabase()

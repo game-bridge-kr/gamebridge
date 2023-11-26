@@ -1,0 +1,15 @@
+{
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python"
+    },
+    "python.formatting.provider": "none",
+    "python.testing.pytestArgs": [
+        "apps/server/tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "python.defaultInterpreterPath": "apps/server/.venv/bin/python",
+    "flake8.args": [
+        "--max-line-length=120",
+    ]
+}
