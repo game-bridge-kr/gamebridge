@@ -11,7 +11,7 @@ def test_hello():
 
     assert response.status_code == 200
     assert content['message'] == "Hello World"
-    
+
 
 def test_naver_authenticate():
     response = client.get("/api/naver/authenticate")

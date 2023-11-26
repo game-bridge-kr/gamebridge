@@ -1,6 +1,5 @@
 import pytest
 from ...src.services.vultr.client import vultr_aysnc_client
-from ...src.main import app
 
 
 @pytest.mark.asyncio
