@@ -26,4 +26,3 @@ async def get_server(instance_id: str):
 @router.delete("/servers/{instance_id}")
 async def delete_server(instance_id: str):
     return vultr_aysnc_client.delete_instance(instance_id)
-

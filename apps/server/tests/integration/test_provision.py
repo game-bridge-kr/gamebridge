@@ -6,4 +6,4 @@ def test_creation():
     plan_type = PlanType.LIGHT
     create_server = CreateServer(game_type=game_type, plan_type=plan_type)
 
-    assert create_server != None
+    assert create_server is not None
