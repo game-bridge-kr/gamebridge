@@ -12,6 +12,7 @@ app = FastAPI()
 def connect_mongodb():
     database.connect()
 
+
 @app.on_event("shutdown")
 def close_mongodb():
     database.close()
@@ -19,6 +20,7 @@ def close_mongodb():
 
 app.include_router(user.router)
 app.include_router(vultr.router)
+
 
 @app.get("/")
 async def root():
